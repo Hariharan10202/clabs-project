@@ -10,11 +10,11 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, closeSidebar }) => {
   return (
     <div
-      className={`w-full overflow-scroll h-full flex flex-col sm:w-[50%] md:w-[40%] bg-white fixed shadow-md right-0 top-0 transition-transform duration-300 ease-in-out transform  ${
+      className={`w-full overflow-y-scroll h-full flex flex-col sm:w-[50%] md:w-[40%] bg-white fixed shadow-md right-0 top-0 transition-transform duration-300 ease-in-out transform  ${
         !isOpen ? "translate-x-full" : "translate-x-0"
       }`}
     >
-      <Header closeSidebar={closeSidebar} label="Saving segment" />
+      <Header label="Saving segment" />
       <SidebarContent closeSidebar={closeSidebar} />
     </div>
   );

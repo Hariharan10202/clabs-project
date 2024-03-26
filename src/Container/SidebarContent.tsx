@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa6";
 
 let optionsData = [
@@ -51,13 +52,14 @@ const SidebarContent: FC<sidebarContentProps> = ({ closeSidebar }) => {
 
   const submitHandler = async (e: any) => {
     e.preventDefault();
-    const formDataArray = Object.entries(formData).map(([key, value]) => ({
-      name: key,
-      value,
+
+    const convertedData = Object.keys(formData).map((key) => ({
+      [key]: formData[key],
     }));
 
-    let jsonObj = { segment_name: schemaName, schema: formDataArray };
-    console.log(jsonObj);
+    let jsonObj = { segment_name: schemaName, schema: convertedData };
+
+    toast.success(JSON.stringify(jsonObj));
 
     // const response = await fetch(
     //   "https://webhook.site/c1dd3c73-85a8-415a-a4df-b5999eca00a6",
@@ -122,7 +124,7 @@ const SidebarContent: FC<sidebarContentProps> = ({ closeSidebar }) => {
             className="flex items-center gap-x-5 w-full"
             key={inputItem.value}
           >
-            <div className="w-3 h-3 rounded-full bg-[#e2e4e6]" />
+            <div className="w-3 h-3 rounded-full bg-[#5ddb78]" />
             <input
               required
               type="text"
