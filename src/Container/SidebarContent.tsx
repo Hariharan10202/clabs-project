@@ -59,7 +59,7 @@ const SidebarContent: FC<sidebarContentProps> = ({ closeSidebar }) => {
 
     let jsonObj = { segment_name: schemaName, schema: convertedData };
 
-    toast.success(JSON.stringify(jsonObj));
+    return toast.success(JSON.stringify(jsonObj));
 
     // const response = await fetch(
     //   "https://webhook.site/c1dd3c73-85a8-415a-a4df-b5999eca00a6",
@@ -124,7 +124,13 @@ const SidebarContent: FC<sidebarContentProps> = ({ closeSidebar }) => {
             className="flex items-center gap-x-5 w-full"
             key={inputItem.value}
           >
-            <div className="w-3 h-3 rounded-full bg-[#5ddb78]" />
+            <div
+              className={`w-3 h-3 rounded-full ${
+                inputItem.label === "Account Name"
+                  ? "bg-[#d24572]"
+                  : "bg-[#5ddb78]"
+              } `}
+            />
             <input
               required
               type="text"
@@ -146,7 +152,9 @@ const SidebarContent: FC<sidebarContentProps> = ({ closeSidebar }) => {
               >
                 <option value="">Add schema to segment</option>
                 {options.length === 0 && (
-                  <option value="">No more options</option>
+                  <option value="" disabled>
+                    No more options
+                  </option>
                 )}
                 {options.map((option: any) => (
                   <option key={option.label} value={option.value}>
@@ -174,6 +182,7 @@ const SidebarContent: FC<sidebarContentProps> = ({ closeSidebar }) => {
         </button>
         <button
           onClick={cancelHandler}
+          type="button"
           className="font-semibold p-2 outline-none bg-white text-[#d9648a] rounded-sm"
         >
           Cancel
